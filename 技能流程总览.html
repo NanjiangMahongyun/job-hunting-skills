@@ -42,7 +42,7 @@
 <body>
 <div class="wrap">
   <h1>当前技能流程总览 <span class="badge">v1.0 · 2026-10-22</span></h1>
-  <div class="sub">主链路：从「发送简历」到「谈判分析报告 + 记忆归档」，以 <b>job-negotiation-strategist</b> 为主线，联动 job-recommender 岗位/公司推荐（目标30个）、company-due-diligence 公司尽调、industry-background-analyzer 行业背景分析、memory-manager 记忆库管理 · <b>第0步先确认 🎓 大学生 / 💼 社会人员，12 个 skill 全覆盖</b> · <b>面试准备</b>靠知识库《面试高频问题与作答框架》《校招与社招时间线全景》《公司类型画像与选择指南》供判断依据 · <b>入职后闭环</b>：onjob-management 在岗管理 → job-switch-decision 跳槽决策 → severance-calculator 补偿维权 · <b>元维护</b>：skill-upgrade-maintainer</div>
+  <div class="sub">主链路：从「发送简历」到「谈判分析报告 + 记忆归档」，以 <b>job-negotiation-strategist</b> 为主线，联动 job-recommender 岗位/公司推荐（默认30个岗位，可指定上限或“30家公司”口径）、company-due-diligence 公司尽调、industry-background-analyzer 行业背景分析、memory-manager 记忆库管理 · <b>第0步先确认 🎓 大学生 / 💼 社会人员，12 个 skill 全覆盖</b> · <b>面试准备</b>靠知识库《面试高频问题与作答框架》《校招与社招时间线全景》《公司类型画像与选择指南》供判断依据 · <b>入职后闭环</b>：onjob-management 在岗管理 → job-switch-decision 跳槽决策 → severance-calculator 补偿维权 · <b>元维护</b>：skill-upgrade-maintainer</div>
 
   <div class="flow">
 
@@ -106,22 +106,22 @@
       </div>
       <div class="branch">
         <div class="bcard free"><div class="bt">✅ 有 → 记录目标公司</div>直接进入下一步尽调</div>
-        <div class="bcard paid"><div class="bt">🔍 无 → AI 按简历+行业趋势全网推荐（job-recommender）</div>目标至少 30 个（30 保底可超）：达标池+备选池两层，逐条标注硬条件；合计&lt;30 执行 2-3 次补搜（换关键词/渠道），补搜到优质岗可超 30，仍不足才如实标注缺口并保存记录。社招按工作年限/在职离职/期望涨幅/背调搜</div>
+        <div class="bcard paid"><div class="bt">🔍 无 → AI 按简历+行业趋势全网推荐（job-recommender）</div>默认目标 30 个岗位（可说“最多30个”或“30家公司”）：达标池+备选池两层，逐条标注硬条件；招聘链接逐条实际打开，过期/已关闭/打不开不计数；按已确认口径不足 30 时执行 2-3 次补搜，仍不足才如实标注缺口并保存记录。报告末尾让用户选尽调范围（几家/全部）</div>
       </div>
     </div>
 
     <div class="node">
       <span class="dot"></span>
       <div class="card decision">
-        <div class="t">⑦ 公司尽调 <span class="skill">company-due-diligence</span> <span class="tag">第0步：确认身份 → 第0步附：确认数据获取方式</span></div>
-        <div class="d">先问：是否有企查查/天眼查等付费 API Key？</div>
+        <div class="t">⑦ 公司尽调 <span class="skill">company-due-diligence</span> <span class="tag">确认身份 → 数据获取方式 → 尽调范围（几家/全部）</span></div>
+        <div class="d">先问：要查哪几家（选公司编号）还是全部？再问：是否有企查查/天眼查等付费 API Key？</div>
       </div>
       <div class="branch">
         <div class="bcard paid"><div class="bt">✅ 有 API Key → 付费 API 调用</div>获取精确参保人数、完整司法案件、欠税、经营异常等结构化数据</div>
         <div class="bcard free"><div class="bt">🆓 无 → 默认免费版</div>通用搜索公开渠道（企查查/天眼查/企业信用信息公示系统/执行信息公开网）</div>
       </div>
       <div class="sub-grid">
-        <span>工商基础信息</span><span>经营与司法风险</span><span>业务模式与客户</span><span>员工口碑</span><span>→ 风险评级 🔴🟡🟢</span>
+        <span>工商基础信息</span><span>经营与司法风险</span><span>业务模式与客户</span><span>员工口碑</span><span>→ 风险评级 🔴🟡🟢</span><span>全部岗位链接复核（在招/核验日期）</span><span>逐家独立报告 + 尽调索引</span><span>本批全部完成后 → 横向对比 + 总排名 + 投递作战清单</span>
       </div>
     </div>
 

@@ -18,13 +18,15 @@ description: 记忆库管理skill。负责读取、更新、归档用户的持�
 - `analysis-archive/` — 一次性分析归档（**append-only：旧版不覆盖、不删除，重新分析另存新日期版本**）
 - `job-pool/` — 岗位池**当前工作集**（会被反复增删，允许覆盖，但覆盖前必须把旧版另存进 `job-pool/history/`）
 
-**两类文件的区别是生命周期，不是主题**：尽调、谈薪、行业分析是"一次分析出一份结论"→ 进 `analysis-archive/` 存档；岗位池是"随补搜不断改写的活文档"→ 进 `job-pool/`。把活文档塞进 append-only 的归档目录，只会逼人要么违反"不覆盖"、要么每次手抄一份。
+**两类文件的区别是生命周期，不是主题**：尽调、谈薪、行业分析是"一次分析出一份结论"→ 进 `analysis-archive/` 存档；岗位池是"随补搜不断改写的活文档"→ 进 `job-pool/`。把活文档塞进 append-only 的归档目录，只会逼人要么违反"不覆盖"、要么每次手抄一份。**尽调索引是查表，不是分析结论**，允许覆盖；它只指向最新报告，历史报告仍只增不删。
 
 ### 生产文件落点总表（本仓库唯一的落点权威，其他 skill 以此为准）
 
 | 产出方 | 落点 | 文件名 | 覆盖规则 |
 |---|---|---|---|
-| company-due-diligence | `memory/analysis-archive/` | `YYYY-MM-DD-公司尽调-[公司名].md` | 只新增 |
+| company-due-diligence（单公司） | `memory/analysis-archive/` | `YYYY-MM-DD-公司尽调-[公司名].md` | 只新增；同日重跑加 `-2` |
+| company-due-diligence（横向对比/总排名） | `memory/analysis-archive/` | `YYYY-MM-DD-公司横向对比-[方向].md` | 只新增；同日重跑加 `-2` |
+| company-due-diligence（留存索引） | `memory/analysis-archive/` | `尽调索引.md` | 允许覆盖；只存索引，不存正文 |
 | job-negotiation-strategist | `memory/analysis-archive/` | `YYYY-MM-DD-谈判筹码-[公司名].md` | 只新增 |
 | salary-negotiation | `memory/analysis-archive/` | `YYYY-MM-DD-谈薪方案-[公司名].md` | 只新增 |
 | contract-reviewer | `memory/analysis-archive/` | `YYYY-MM-DD-合同审查-[公司名].md` | 只新增 |
@@ -83,9 +85,10 @@ description: 记忆库管理skill。负责读取、更新、归档用户的持�
 ### 场景3：完成一次重要分析（如公司尽调、谈薪策略）
 
 1. 将分析结果保存到 `memory/analysis-archive/YYYY-MM-DD-[类型]-[公司名].md`
-2. 在 `memory/career-timeline.md` 添加一条记录，关联归档文件
-3. 在 `memory/current-state.md` 更新"最近一次分析"字段
-4. 告诉用户："分析已归档到 memory/analysis-archive/xxx.md，下次可直接引用"
+2. 若本次是公司尽调：每完成一家就更新 `memory/analysis-archive/尽调索引.md`；本批全部完成后再生成横向对比/总排名文件
+3. 在 `memory/career-timeline.md` 添加一条记录，关联归档文件
+4. 在 `memory/current-state.md` 更新"最近一次分析"字段
+5. 告诉用户："分析已归档到 memory/analysis-archive/xxx.md，下次可直接引用"
 
 ### 场景4：职业状态变化（入职/离职/拿到offer）
 
@@ -124,6 +127,8 @@ memory/
 ├── resume-2026-10.md
 ├── analysis-archive/
 │   ├── 2026-10-21-公司尽调-XX科技.md
+│   ├── 2026-10-21-公司横向对比-AI方向.md
+│   ├── 尽调索引.md                      ← 公司 → 最新报告 + 评级 + 有效期，允许覆盖
 │   ├── 2026-10-21-谈判筹码-XX科技.md
 │   ├── 2026-10-21-谈薪方案-XX科技.md
 │   ├── 2026-10-21-行业分析-Java后端.md
@@ -135,6 +140,7 @@ memory/
 ```
 
 归档格式：`YYYY-MM-DD-[分析类型]-[对象].md`；岗位池格式：`[地区]-[方向].md`（不带日期，日期只在 `history/` 里）。
+同日重跑同一对象：文件名加 `-2`、`-3`，不覆盖旧报告。`尽调索引.md` 是唯一允许覆盖的归档文件。
 
 ---
 
@@ -180,7 +186,9 @@ skill-upgrade-maintainer         → 不产数据文件，改动写进 git 提�
 - [ ] current-state.md 的职业状态是否准确？
 - [ ] career-timeline.md 是否有对应的时间线记录？
 - [ ] 分析结果是否已归档到 analysis-archive/？
-- [ ] 岗位池是否写在 `memory/job-pool/` 且覆盖前已把旧版放进 `history/`？
+- [ ] 公司尽调是否一家一份独立报告，并更新了 `尽调索引.md`？
+- [ ] 横向对比/总排名是否等本批范围内全部公司完成后才生成？
+- [ ] 岗位池是否写在 `memory/job-pool/` 且覆盖前已把旧版放进 `history/`？岗位池是否含投递链接核验表？
 - [ ] `memory/` 之外（仓库根、`knowledge-base/`、`.claude/skills/`）有没有多出生产文件？
 - [ ] 是否把实际写入的文件路径回报给用户了？
 - [ ] 是否告诉用户更新了什么？
