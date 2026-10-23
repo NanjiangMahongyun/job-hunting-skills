@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>求职技能包流程总览</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Microsoft YaHei", system-ui, -apple-system, sans-serif; background: #f6f7f9; color: #1f2937; padding: 20px; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  .sub { color: #6b7280; font-size: 13px; margin-bottom: 18px; }
+  .badge { display: inline-block; background: #2563eb; color: #fff; font-size: 12px; padding: 2px 10px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
+  .flow { position: relative; padding-left: 34px; }
+  .flow::before { content: ""; position: absolute; left: 13px; top: 8px; bottom: 8px; width: 3px; background: #cbd5e1; border-radius: 2px; }
+  .node { position: relative; margin-bottom: 10px; }
+  .node::before { content: ""; position: absolute; left: -28px; top: 20px; width: 15px; height: 3px; background: #cbd5e1; }
+  .dot { position: absolute; left: -34px; top: 14px; width: 16px; height: 16px; border-radius: 50%; background: #2563eb; border: 3px solid #fff; box-shadow: 0 0 0 2px #2563eb; z-index: 1; }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-left: 4px solid #2563eb; border-radius: 8px; padding: 10px 14px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .card .t { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+  .card .d { font-size: 12.5px; color: #4b5563; line-height: 1.5; }
+  .card .tag { display: inline-block; font-size: 11px; background: #eff6ff; color: #1d4ed8; border-radius: 4px; padding: 1px 6px; margin-right: 5px; }
+  .card .skill { display: inline-block; font-size: 11px; background: #f3f4f6; color: #374151; border-radius: 4px; padding: 1px 6px; margin-right: 5px; }
+  .entry { background: #eef2ff; border-left-color: #4f46e5; }
+  .entry .dot { background: #4f46e5; box-shadow: 0 0 0 2px #4f46e5; }
+  .decision { border-left-color: #d97706; }
+  .decision .dot { background: #d97706; box-shadow: 0 0 0 2px #d97706; }
+  .branch { margin-left: 24px; margin-top: 8px; margin-bottom: 8px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .bcard { flex: 1 1 260px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 9px 12px; font-size: 12.5px; }
+  .bcard .bt { font-weight: 600; margin-bottom: 3px; }
+  .bcard.paid { border-top: 3px solid #0891b2; }
+  .bcard.free { border-top: 3px solid #059669; }
+  .sub-grid { margin: 6px 0 2px 24px; background: #fff; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 8px 12px; font-size: 12px; color: #374151; display: flex; flex-wrap: wrap; gap: 6px; }
+  .sub-grid span { background: #f9fafb; border: 1px solid #e5e7eb; padding: 2px 8px; border-radius: 4px; }
+  .out { background: #ecfdf5; border-left-color: #059669; }
+  .out .dot { background: #059669; box-shadow: 0 0 0 2px #059669; }
+  .archive { background: #fff7ed; border-left-color: #ea580c; }
+  .archive .dot { background: #ea580c; box-shadow: 0 0 0 2px #ea580c; }
+  .arrow-label { font-size: 11px; color: #9ca3af; margin-left: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>当前技能流程总览 <span class="badge">v1.0 · 2026-10-22</span></h1>
+  <div class="sub">主链路：从「发送简历」到「谈判分析报告 + 记忆归档」，以 <b>job-negotiation-strategist</b> 为主线，联动 job-recommender 岗位/公司推荐（目标30个）、company-due-diligence 公司尽调、industry-background-analyzer 行业背景分析、memory-manager 记忆库管理 · <b>第0步先确认 🎓 大学生 / 💼 社会人员，12 个 skill 全覆盖</b> · <b>面试准备</b>靠知识库《面试高频问题与作答框架》《校招与社招时间线全景》《公司类型画像与选择指南》供判断依据 · <b>入职后闭环</b>：onjob-management 在岗管理 → job-switch-decision 跳槽决策 → severance-calculator 补偿维权 · <b>元维护</b>：skill-upgrade-maintainer</div>
+
+  <div class="flow">
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card entry">
+        <div class="t">📄 用户发送简历 <span class="skill">入口</span></div>
+        <div class="d">提供简历文件 / 粘贴文本 + 目标公司信息</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card decision">
+        <div class="t">① 确认求职身份 <span class="skill">全部 12 个 skill 的第0步</span> <span class="tag">必问 · 先于一切分析</span></div>
+        <div class="d">判定：大学生（校招/实习） or 社会人员（社招/跳槽）。规则：<b>优先问用户，用户自述优先于简历/记忆推断；无法确定默认大学生并在报告顶部标注「身份待确认」</b>。该前置已写进每个 SKILL.md</div>
+      </div>
+      <div class="branch">
+        <div class="bcard free"><div class="bt">🎓 大学生 / 应届生</div>校招+实习通道；卖点=学历/潜力/实习/竞赛/项目；硬条件含实习日薪、校招薪资；走应届筹码库</div>
+        <div class="bcard paid"><div class="bt">💼 社会人员 / 跳槽</div>社招+猎头/内推通道；卖点=经验/业绩/职级；硬条件含工作年限、在职离职、期望涨幅15-30%、背调、社保；走社招筹码库/维权/简历专项</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card">
+        <div class="t">② 读取简历 <span class="skill">job-negotiation-strategist</span></div>
+        <div class="d">解析简历内容：技能、项目、经历、证书（仅作证据补充，不作方向判断依据）</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card decision">
+        <div class="t">③ 确认求职方向与自我定位 <span class="skill">job-negotiation-strategist 第一步</span> <span class="tag">必问</span></div>
+        <div class="d">询问：求职方向 / 自我定位自述 / 目标地区。规则：<b>用户自述优先于简历推断</b>（避免按简历猜错方向）</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card">
+        <div class="t">④ 提取简历核心优势 <span class="skill">job-negotiation-strategist 第二步</span></div>
+        <div class="d">围绕已确认方向提取（如 AI Agent/RAG → RAG 实战、Agent 驱动开发优先）；量化优先。社招重经验/业绩量化</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card">
+        <div class="t">⑤ 行业背景分析 <span class="skill">industry-background-analyzer</span></div>
+        <div class="d">基于③确认方向联网搜索：行业动态 / 发展趋势 / 就业薪资 / 高校供给 / 政策 / 头部公司 → 判断风口期或收缩期</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card decision">
+        <div class="t">⑥ 确定目标公司 <span class="skill">job-negotiation-strategist 第四步</span> <span class="tag">必做</span></div>
+        <div class="d">先问：是否已有想好的公司？</div>
+      </div>
+      <div class="branch">
+        <div class="bcard free"><div class="bt">✅ 有 → 记录目标公司</div>直接进入下一步尽调</div>
+        <div class="bcard paid"><div class="bt">🔍 无 → AI 按简历+行业趋势全网推荐（job-recommender）</div>目标至少 30 个（30 保底可超）：达标池+备选池两层，逐条标注硬条件；合计&lt;30 执行 2-3 次补搜（换关键词/渠道），补搜到优质岗可超 30，仍不足才如实标注缺口并保存记录。社招按工作年限/在职离职/期望涨幅/背调搜</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card decision">
+        <div class="t">⑦ 公司尽调 <span class="skill">company-due-diligence</span> <span class="tag">第0步：确认身份 → 第0步附：确认数据获取方式</span></div>
+        <div class="d">先问：是否有企查查/天眼查等付费 API Key？</div>
+      </div>
+      <div class="branch">
+        <div class="bcard paid"><div class="bt">✅ 有 API Key → 付费 API 调用</div>获取精确参保人数、完整司法案件、欠税、经营异常等结构化数据</div>
+        <div class="bcard free"><div class="bt">🆓 无 → 默认免费版</div>通用搜索公开渠道（企查查/天眼查/企业信用信息公示系统/执行信息公开网）</div>
+      </div>
+      <div class="sub-grid">
+        <span>工商基础信息</span><span>经营与司法风险</span><span>业务模式与客户</span><span>员工口碑</span><span>→ 风险评级 🔴🟡🟢</span>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card">
+        <div class="t">⑧ 优势 × 劣势匹配 <span class="skill">job-negotiation-strategist 第六步</span></div>
+        <div class="d">你的优势 → 解决公司的什么问题 → 值多少钱（结合行业薪资定价）；社招按跳槽涨幅15-30%定价</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card">
+        <div class="t">⑨ 生成谈判筹码清单 <span class="skill">job-negotiation-strategist 第七步</span></div>
+        <div class="d">🔴 硬筹码（急缺/稀缺技能/立即到岗）· 🟡 软筹码（项目/竞赛/学历）· ⚫ 补偿筹码（签字费/绩效保底/调薪点）；社招含薪资流水/offer比较/竞业/职级筹码</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card">
+        <div class="t">⑩ 生成定制话术 <span class="skill">job-negotiation-strategist 第八步</span></div>
+        <div class="d">表达意愿 + 展示价值 + 提出要求 + 留有余地；含应对压价/画饼/底薪不动时的话术（社招版含涨幅/在职离职口径）</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card out">
+        <div class="t">📋 输出：谈判分析报告 <span class="skill">交付物</span></div>
+        <div class="d">核心优势 + 公司劣势/压力点 + 筹码清单 + 谈判策略 + 定制话术 + 红线 + 最终建议</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card archive">
+        <div class="t">🗂️ 归档：记忆库 <span class="skill">memory-manager</span></div>
+        <div class="d">报告 → memory/analysis-archive/（按日期-类型-对象命名）；提炼个人事实 → profile / current-state / career-timeline</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card" style="border-left-color:#7c3aed;">
+        <div class="t">🌙 入职后闭环（找到工作之后到下次跳槽）<span class="skill">在职阶段</span></div>
+        <div class="d">主链路交付的不是终点——入职后进入下面这条在职线，与谈判主线通过「补偿/跳槽」接口相连</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card">
+        <div class="t">⑪ 入职后在岗管理 <span class="skill">onjob-management</span> <span class="tag">第0步：确认身份 → 第0步附：确认当前处境</span></div>
+        <div class="d">试用期 30/60/90 天目标 → 融入与 visibility（对齐预期 / 找关键人 / 主动暴露风险 / 留痕）→ 绩效博弈</div>
+      </div>
+      <div class="sub-grid">
+        <span>公司恶化信号：欠薪/裁员/画饼不兑现/高管换血</span><span>岗位信号：被架空/会议不带我/长期杂活/绩效低分无改进路径</span>
+      </div>
+      <div style="margin:6px 0 0 24px;font-size:12px;color:#374151;">📌 <b>监测到 ≥2 个预警</b> → 自动联动 job-switch-decision，不等被动发生</div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card decision">
+        <div class="t">⑫ 主动跳槽决策 <span class="skill">job-switch-decision</span> <span class="tag">该不该走</span></div>
+        <div class="d">信号判断（该走 vs 可再等）→ 时机窗口（金三银四/金九银十、拿年终或背书后）→ <b>在职骑驴找马优于裸辞</b> → 八步落地：简历→找→面试→定offer→提离→交接→离职证明→社保衔接→背调→竞业核实 → 跳槽理由口径（简历/面试/背调一致）</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card archive">
+        <div class="t">⑬ 被动离职分支 <span class="skill">severance-calculator</span></div>
+        <div class="d">被辞退/劝退/被迫离职 → 算 N / N+1 / 2N、判断公司说法合法性、证据清单、仲裁流程（主动走 vs 被赶走，拿的钱完全不同）</div>
+      </div>
+    </div>
+
+    <div class="node">
+      <span class="dot"></span>
+      <div class="card" style="border-left-color:#0891b2;">
+        <div class="t">🔧 元维护 <span class="skill">skill-upgrade-maintainer</span> <span class="tag">对技能包自身</span></div>
+        <div class="d">加载全景 + <b>结构自检</b>（首行是否 <code>---</code>、有无悬空编号引用）→ 审视意图（需用户确认）→ 知识库时效/完整/缺口体检（联网核实）→ 查漏补缺 → 优化 skill 提示词 → 增加实用步骤 → 同步 README／索引／流程图</div>
+      </div>
+    </div>
+
+    <div style="margin:16px 0 0 34px;font-size:11.5px;color:#9ca3af;border-top:1px dashed #cbd5e1;padding-top:10px;">💡 知识库导览（14 份资料，README 给出推荐阅读顺序：🎓/💼 通用 11 份 + 💼 专用 2 份 + 🔧 维护 1 份）属入门教程，见 README「使用前建议」章节，不是 skill 流程步骤。<br><b>v1.0 基线（2026-10-22）</b>：本图与根 README、使用索引同版本标识。维护规范与发布前叠甲体检写在 <code>skill-upgrade-maintainer</code> 里，改这个仓库本身就走那个 skill。</div>
+
+  </div>
+</div>
+</body>
+</html>

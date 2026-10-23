@@ -1,0 +1,19 @@
+# memory-manager 运行时写进这里：真实档案、职业时间线、简历与分析归档。
+# 本仓库只放技能与知识库（公开去隐私版），个人数据一律留在本地。
+/memory/
+
+# 维护者个人的版本对账记录：只给自己看，不随仓库发布。
+# 设计规范与复用提示的唯一权威在 skill-upgrade-maintainer 的「维护规范」表，逐轮修订靠 git 提交信息留痕。
+/技能使用与更新日志.md
+
+# 操作系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# 临时产物
+__pycache__/
+*.pyc
+*.log
