@@ -193,7 +193,7 @@ company-due-diligence → 查公司靠不靠谱
 job-negotiation-strategist → 谈薪筹码
 knowledge-base/面试高频问题与作答框架 → JD 拆出的考点映射成面试准备与反问
 knowledge-base/校招与社招时间线全景 → 判断这个 JD 现在投赶不赶得上
-完成后 → memory-manager 落盘到 memory/resume-YYYY-MM.md，并更新 profile.md 的"简历版本"字段
+完成后 → memory-manager 落盘到 memory/01-resume/resume-YYYY-MM.md，并更新 profile.md 的"简历版本"字段
 ```
 
 ---

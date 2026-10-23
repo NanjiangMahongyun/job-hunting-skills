@@ -404,5 +404,5 @@ description: 国内本土化谈薪与offer谈判skill，适配小微企业/政�
 4. knowledge-base/面试高频问题与作答框架 → 面试中如何展示价值，为谈薪铺垫
 5. knowledge-base/五险一金与个税实操手册 → 把 offer 折算成总包与到手，锁定缴费基数口径
 6. knowledge-base/面试高频问题与作答框架 → 3.2 期望薪资答法，与本报价的口径保持一致
-7. 完成后 → memory-manager 归档到 memory/analysis-archive/YYYY-MM-DD-谈薪方案-[公司名].md
+7. 完成后 → memory-manager 归档到 memory/05-negotiation/YYYY-MM-DD-谈薪方案-[公司名].md
 ```

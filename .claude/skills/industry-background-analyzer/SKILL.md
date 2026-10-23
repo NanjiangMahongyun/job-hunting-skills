@@ -216,7 +216,7 @@ job-negotiation-strategist → 结合行业薪资水平定目标价
 knowledge-base/毕业常识完整版 → 法律权益
 knowledge-base/求职心理指南 → 心态管理
 knowledge-base/求职信息渠道与数据源清单 → 行业数据与官方工资价位的来源，及其能否写进报告
-完成后 → memory-manager 归档到 memory/analysis-archive/YYYY-MM-DD-行业分析-[方向].md
+完成后 → memory-manager 归档到 memory/02-industry/YYYY-MM-DD-行业分析-[方向].md
 ```
 
 ---

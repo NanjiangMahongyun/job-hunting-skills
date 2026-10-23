@@ -189,7 +189,7 @@ for f in knowledge-base/*.md; do n=$(basename "$f" .md); printf "%s: %s\n" "$n" 
 | 检查项 | 怎么查 | 不过怎么办 |
 |---|---|---|
 | ① 隐私：本地路径、账号、手机号/身份证样式、邮箱、真实人名 | `grep -rEn -e 'Users[\\/][A-Za-z0-9_.-]+' -e '1[3-9][0-9]{9}' -e '[0-9]{17}[0-9Xx]' --include=*.md --include=*.html .` | ⚠️ URL 里的长数字串会假阳性，命中后逐条看上下文；确认是真实信息的一律改写为虚构示例，而不是打码 |
-| ② 个人记忆库与生产文件落点 | `git ls-files \| grep -iE -e '^memory/' -e 'profile\.md' -e 'current-state\.md' -e 'career-timeline\.md' -e 'analysis-archive'` 应为空；`.gitignore` 里必须有 `/memory/`。再看**落点有没有越界**：`find . -maxdepth 1 -type f -name '*.md' -not -name 'README*' -not -name '技能*' -print` 必须为空——岗位池、尽调报告、简历这类生产文件只允许待在 `memory/` 下（见 memory-manager「生产文件落点总表」），出现在仓库根就等于把真实公司名写进了公开库 | 先从索引移除，再确认工作树与历史都没有残留；落点越界的文件移到 `memory/` 对应目录 |
+| ② 个人记忆库与生产文件落点 | `git ls-files \| grep -iE -e '^memory/' -e 'profile\.md' -e 'current-state\.md' -e 'career-timeline\.md' -e '01-resume\|02-industry\|03-job-pool\|04-due-diligence\|05-negotiation\|06-onjob\|07-job-switch'` 应为空；`.gitignore` 里必须有 `/memory/`。再看**落点有没有越界**：`find . -maxdepth 1 -type f -name '*.md' -not -name 'README*' -not -name '技能*' -print` 必须为空——岗位池、尽调报告、简历这类生产文件只允许待在 `memory/` 下（见 memory-manager「生产文件落点总表」），出现在仓库根就等于把真实公司名写进了公开库 | 先从索引移除，再确认工作树与历史都没有残留；落点越界的文件移到 `memory/` 对应目录 |
 | ③ 历史提交（不止当前工作树干净，**也不止文件内容**） | `git log --all --diff-filter=A --name-only --pretty=format:` 逐条看是否曾提交过隐私文件；再 `git config --get-regexp user\.` 与 `git log --all --pretty=format:'%an <%ae>'` 看每条提交携带的**作者名与邮箱**——它不在任何文件里，所有针对文件内容的 grep 都查不到它，但 push 之后永久公开且可被爬 | 历史含隐私不能靠后续提交掩盖，需重建历史（属破坏性操作，先与使用者确认）；作者身份未 push 时最省事——给本仓库单独设 `git config user.name/user.email`（不加 `--global`）后重做提交，或直接删 `.git` 重新 `init` |
 | ④ 是否指向真实主体 | `grep -rn --include=*.md -e 黑厂 -e 无良 -e 名声很差 -e 口碑最差 .`；命中必须出现在"不这样下结论"的规则句里；再用 `grep -rn "腾讯\|阿里\|字节\|华为" --include=*.md .` 确认每处只是渠道举例或来源引用，不是对某公司的负面结论 | 改成 XX 公司 + 结构性描述；公司点评只写"可核实事实 + 基于事实的风险推演"，见 company-due-diligence「最高优先级铁律」第 5 条 |
 | ⑤ 造假/规避类措辞是否在禁止语境 | `grep -rn --include=*.md -e 伪造 -e 虚报 -e 虚构 -e 隐瞒 -e 规避 -e 钻空子 .` 逐条确认上下文有 🚨／❌／红线标记 | 改写为"真实前提下的表述方式 vs 造假"对照表；保留自我保护内容，删掉只有隐瞒真相才有效的建议 |
@@ -212,7 +212,7 @@ comm -13 /tmp/skills.txt /tmp/cited.txt | grep -E "generator|analyzer|prep|optim
 grep -rnE "(^|[[:space:]]|[│├└])[0-9]{2}-(岗位推荐|公司尽调|谈判筹码|谈薪执行|合同审核|补偿金|行业背景分析|JD分析)" .claude/skills/*/SKILL.md   # 应为空
 
 # 3) 归档接线是否双向：产出 skill 各自有没有写「完成后 → memory-manager 归档/落盘」
-grep -rlE "memory/(analysis-archive|job-pool|resume-)" .claude/skills/*/SKILL.md | wc -l   # 应为 11（除 skill-upgrade-maintainer 外的全部）
+grep -rlE "memory/(01-resume|02-industry|03-job-pool|04-due-diligence|05-negotiation|06-onjob|07-job-switch)" .claude/skills/*/SKILL.md | wc -l   # 应为 11（除 skill-upgrade-maintainer 外的全部）
 
 # 4) 生产文件有没有越界到要公开的地方（仓库根）
 find . -maxdepth 1 -type f -name '*.md' -not -name 'README*' -not -name '技能*' -print   # 应为空
@@ -326,7 +326,7 @@ github 上确有现成的"技能包/技能维护"类**通用元技能**（与 on
 | 法律表述带边界  | 写"可以录音／可以主张"时**同段**写合法边界（只录本人参与的对话，不窃听、不诱导、不剪辑）；结论性表述写成"可能／以受理机关认定为准"，不把某地裁判尺度当全国保证；引用的司法解释须确认现行且给机构＋日期                                                                                                                | 毕业常识完整版第四十节、公开发布与免责合规手册第二／六节                    |
 | 来源可核对    | 借鉴与政策断言给"机构 + 日期 + URL"；URL 必须实测打开过，核不到就写官网检索指引，不放推测出来的地址                                                                                                                                                              | knowledge-base 各文档来源节                           |
 | 隐私边界     | 个人记忆库与真实分析报告只存本地；`/memory/` 已被 `.gitignore` 屏蔽；示例统一用 XX 公司、张三等虚构占位                                                                                                                                                     | .gitignore、README 去隐私声明                         |
-| 产出落点唯一   | 生产文件只允许落在 `memory/` 下，路径以 memory-manager「生产文件落点总表」为唯一权威；一次性结论进 `analysis-archive/`（只增），岗位池这类活文档进 `job-pool/`（可覆盖，旧版进 `history/`）；仓库根、`knowledge-base/`、`.claude/` 出现生产文件即视为未过检。目录运行时 `mkdir` 创建，**不提交空目录或 `.gitkeep`** | memory-manager 落点总表、本 skill 叠甲体检 ②⑨ |
+| 产出落点唯一   | 生产文件只允许落在 `memory/` 下，路径以 memory-manager「生产文件落点总表」为唯一权威；一次性结论进 `02/04/05/06/07` 阶段目录（只增），岗位池这类活文档进 `03-job-pool/`（可覆盖，旧版进 `history/`）；仓库根、`knowledge-base/`、`.claude/` 出现生产文件即视为未过检。目录运行时 `mkdir` 创建，**不提交空目录或 `.gitkeep`** | memory-manager 落点总表、本 skill 叠甲体检 ②⑨ |
 | 发布合规     | 公开前跑完「发布前叠甲体检」：隐私、名誉权、商业秘密、个人信息（含 git 提交元数据）、开源许可、免责与更正机制                                                                                                                                                              | 本 skill 第六步附、公开发布与免责合规手册            |
 | 对外文档同步   | 根 `README.md`（薄首页）／`README-使用索引.md`（详版）／`技能流程总览.html`（一张图）三者的版本标识与结构描述必须一致，不允许落后；首页与详版定位不重叠、不互相替换                                                                                        | 本 skill 第六步                    |
 

@@ -132,7 +132,7 @@ description: 主动离职与跳槽决策skill。针对当前公司与自身情�
    ├─ 引用：knowledge-base/公司类型画像与选择指南（跳去哪一类/结构差异）
    ├─ 引用：knowledge-base/求职信息渠道与数据源清单（背调与目标公司核查入口）
    ├─ 前置：onjob-management（在岗风险监测触发本 skill）
-   └─ 完成后 → memory-manager 归档到 memory/analysis-archive/YYYY-MM-DD-跳槽决策-[方向].md
+   └─ 完成后 → memory-manager 归档到 memory/07-job-switch/YYYY-MM-DD-跳槽决策-[方向].md
 被辞退/被迫 → .claude/skills/severance-calculator/SKILL.md（补偿计算 + 仲裁）
 ```
 

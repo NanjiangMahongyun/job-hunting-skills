@@ -174,7 +174,7 @@ salary-negotiation → offer 校验清单
 contract-reviewer（本skill）→ 签字前最后一道防线
 knowledge-base/毕业常识完整版 → 所有判断的法律依据
 knowledge-base/五险一金与个税实操手册 → 社保公积金条款、缴费基数与缴存比例的核对口径
-完成后 → memory-manager 归档到 memory/analysis-archive/YYYY-MM-DD-合同审查-[公司名].md
+完成后 → memory-manager 归档到 memory/05-negotiation/YYYY-MM-DD-合同审查-[公司名].md
 ```
 
 ---

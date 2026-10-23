@@ -130,7 +130,7 @@ description: 入职后在岗管理skill。针对已入职的具体公司与自�
    ├─ 引用：knowledge-base/职场小技巧与人情世故（软技巧）
    ├─ 引用：knowledge-base/离职与背调合规手册（交接/社保/竞业/背调）
    ├─ 引用：knowledge-base/五险一金与个税实操手册（在职核对缴费基数与缴存记录）
-   └─ 完成后 → memory-manager 归档到 memory/analysis-archive/YYYY-MM-DD-在岗记录-[主题].md（轻量结论只更新 current-state.md）
+   └─ 完成后 → memory-manager 归档到 memory/06-onjob/YYYY-MM-DD-在岗记录-[主题].md（轻量结论只更新 current-state.md）
 监测到 ≥2 个预警 → job-switch-decision（该不该走/时机/步骤）
 被辞退/被迫 → .claude/skills/severance-calculator/SKILL.md（补偿计算 + 仲裁）
 ```

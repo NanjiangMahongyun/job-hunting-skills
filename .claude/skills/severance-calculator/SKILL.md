@@ -216,7 +216,7 @@ contract-reviewer → 入职时把好关，减少日后纠纷
 severance-calculator（本skill）→ 出事时算清钱、走好流程
 knowledge-base/毕业常识完整版 → 所有法律依据
 knowledge-base/五险一金与个税实操手册 → 缴费基数核实、断缴/补缴与公积金转移接续的连带影响
-完成后 → memory-manager 归档到 memory/analysis-archive/YYYY-MM-DD-离职补偿-[公司名].md
+完成后 → memory-manager 归档到 memory/07-job-switch/YYYY-MM-DD-离职补偿-[公司名].md
 ```
 
 ---
